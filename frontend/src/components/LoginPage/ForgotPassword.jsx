@@ -17,9 +17,9 @@ import Modal from "../modal/modal";
 import red from "./LoginImg/red.png";
 
 const ForgotPassword = () => {
-  
+
   const { setEmailForgot } = useContext(ForgetPasswordContext);
-  const {setResetDetails} = useAuth()
+  const { setResetDetails } = useAuth()
   const navigate = useNavigate();
 
   const [emailField, setEmailField] = useState("");
@@ -62,7 +62,7 @@ const ForgotPassword = () => {
   const requestEmail = async (email) => {
     try {
       const response = await fetch(
-        "https://zuvatar.hng.tech/api/v1/forgotPassword",
+        "http://175.178.196.37:8000/api/v1/forgotPassword",
         {
           // Adding method type
 
@@ -70,7 +70,7 @@ const ForgotPassword = () => {
 
           // Adding body or contents to send
 
-          body: JSON.stringify({email}),
+          body: JSON.stringify({ email }),
 
           // Adding headers to the request
 
@@ -83,9 +83,9 @@ const ForgotPassword = () => {
       setEmailForgot(email);
       if (response.status === 200) {
         let body = await response.json()
-        setResetDetails(prev=>({...prev, email,pin:body.pin}));
+        setResetDetails(prev => ({ ...prev, email, pin: body.pin }));
         navigate("/check-email");
-      }else{
+      } else {
         setErrorModal(true)
       }
     } catch (error) {

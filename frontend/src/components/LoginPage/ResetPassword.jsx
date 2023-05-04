@@ -16,9 +16,9 @@ const ResetPassword = () => {
 
   const [invalid, setInvalid] = useState(false);
 
-  const {resetDetails:{
+  const { resetDetails: {
     email
-  }} = useAuth()
+  } } = useAuth()
 
 
 
@@ -51,7 +51,7 @@ const ResetPassword = () => {
       return;
     }
     setInvalid(false);
-    fetch("https://zuvatar.hng.tech/api/v1/updatepassword", {
+    fetch("http://175.178.196.37:8000/api/v1/updatepassword", {
       method: "PUT",
       body: JSON.stringify({ email, password: pwd.new_password }),
       headers: {
@@ -60,7 +60,7 @@ const ResetPassword = () => {
       },
     })
       .then((res) => {
-        if (res.status === 201||res.status===200) {
+        if (res.status === 201 || res.status === 200) {
           setPwd({
             new_password: "",
             confirm_password: "",
@@ -89,9 +89,9 @@ const ResetPassword = () => {
   };
 
   return (
-    <RpContext.Provider value={{setCloseAuthModal}}>
-      {!closeAuthModal&&(
-        <AuthenticationPopup/>
+    <RpContext.Provider value={{ setCloseAuthModal }}>
+      {!closeAuthModal && (
+        <AuthenticationPopup />
       )}
       <div className="flex flex-col pt-[120px] md:p-0 md:justify-center items-center h-screen">
         <div className="flex flex-col w-full max-w-xl px-6 gap-6 md:gap-8 items-center justify-center">
@@ -126,9 +126,8 @@ const ResetPassword = () => {
                 required
                 type="password"
                 placeholder="New password"
-                className={`border ${
-                  invalid && invalidPassword && "border-red-600"
-                } p-3 md:p-5 w-full my-1 rounded-lg outline-none`}
+                className={`border ${invalid && invalidPassword && "border-red-600"
+                  } p-3 md:p-5 w-full my-1 rounded-lg outline-none`}
                 onChange={handleChange}
               />
             </div>
@@ -141,17 +140,16 @@ const ResetPassword = () => {
                 required
                 type="password"
                 placeholder="Confirm password"
-                className={`border ${
-                  invalid && pwdNotMatch && "border-red-600"
-                } p-3 md:p-5 w-full my-1 rounded-lg outline-none`}
+                className={`border ${invalid && pwdNotMatch && "border-red-600"
+                  } p-3 md:p-5 w-full my-1 rounded-lg outline-none`}
                 onChange={handleChange}
               />
               <Button
                 type="submit"
                 className="w-full flex align-center justify-center bg-[#8B70E9] mt-8 text-white h-[58px] md:h-[68px] 
                 text-lg md:text-3xl font-nunito"
-              > 
-                  Reset Password     
+              >
+                Reset Password
               </Button>
             </div>
           </form>
@@ -164,9 +162,9 @@ const ResetPassword = () => {
 export default ResetPassword;
 
 const AuthenticationPopup = () => {
-  const {setCloseAuthModal} = useContext(RpContext)
+  const { setCloseAuthModal } = useContext(RpContext)
   const [pin, setPin] = useState("");
-  const { resetDetails:{
+  const { resetDetails: {
     pin: resetPin
   } } = useAuth();
   const [error, setError] = useState("");
@@ -174,18 +172,18 @@ const AuthenticationPopup = () => {
 
 
   const handleChange = ({ target }) => {
-    if(target.value.length>6){
+    if (target.value.length > 6) {
       setError("pins length shouldn't be longer than 6")
-      setTimeout(()=>setError(''), 3000)
+      setTimeout(() => setError(''), 3000)
       return
     }
-    
-    if(!Number(target.value)&&target.value!='0'){
-      if(target.value.length){
+
+    if (!Number(target.value) && target.value != '0') {
+      if (target.value.length) {
 
         setError('you can only input numbers')
         setInvalid(true)
-        setTimeout(()=>{
+        setTimeout(() => {
           setInvalid(false)
           setError('')
         }, 3000)
@@ -201,7 +199,7 @@ const AuthenticationPopup = () => {
     } else {
       setError("incorrect pin, check your email and try again");
       setInvalid(true)
-      setTimeout(()=>{
+      setTimeout(() => {
         setInvalid(false)
         setError('')
       }, 5000)
@@ -237,9 +235,8 @@ const AuthenticationPopup = () => {
               placeholder="Enter pin"
               value={pin}
               onChange={handleChange}
-              className={`${
-                invalid && "border-red-600"
-              } border m-auto p-3 font-nunito md:p-5 w-[90%] rounded-lg outline-none rounder-lg`}
+              className={`${invalid && "border-red-600"
+                } border m-auto p-3 font-nunito md:p-5 w-[90%] rounded-lg outline-none rounder-lg`}
             />
           </div>
           <button

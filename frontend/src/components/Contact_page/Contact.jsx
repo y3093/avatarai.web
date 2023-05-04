@@ -70,7 +70,7 @@ const Contact = () => {
     // setModalContent(loader)
     try {
       const response = await fetch(
-        "https://zuvatar.hng.tech/api/v1/contactForm",
+        "http://175.178.196.37:8000/api/v1/contactForm",
         {
           method: "POST",
           headers: {

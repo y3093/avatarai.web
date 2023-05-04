@@ -48,7 +48,7 @@ const FaqNewsletter = () => {
 
 	const subscribe = async (userEmail) => {
 		try {
-			const response = await fetch('https://zuvatar.hng.tech/api/v1/newsletter', {
+			const response = await fetch('http://175.178.196.37:8000/api/v1/newsletter', {
 				method: 'POST',
 
 				body: JSON.stringify({

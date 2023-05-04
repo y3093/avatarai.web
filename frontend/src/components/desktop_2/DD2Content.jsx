@@ -50,7 +50,7 @@ const ImageUpload = ({ setStep, step, photoUser }) => {
 	};
 
 	const [title, setTitle] = useState('');
-	const handleTitle = event =>{
+	const handleTitle = event => {
 		setTitle(event.target.value);
 		console.log('value is:', event.target.value);
 	}
@@ -69,7 +69,8 @@ const ImageUpload = ({ setStep, step, photoUser }) => {
 		// console.log("formdata", title);
 
 		await axios
-			.post('https://zuvatar.hng.tech/api/v1/photos', formData)
+			// /api/v1
+			.post('http://175.178.196.37:8000/photos', formData)
 			.then((response) => {
 				console.log('upload data: ', response.data);
 				setGenAvt(false);
@@ -83,7 +84,7 @@ const ImageUpload = ({ setStep, step, photoUser }) => {
 	};
 
 	const imageCheck = () => {
-		if (imageToUpload.length < 10 || imageToUpload.length > 20 || title==="") {
+		if (imageToUpload.length < 10 || imageToUpload.length > 20 || title === "") {
 			Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
@@ -139,7 +140,7 @@ const ImageUpload = ({ setStep, step, photoUser }) => {
 							<img src={GrayLine} alt="" className="w-[50px] md:w-[120px] md:h-[5px]" />
 						</div>
 					</div>
-					<input defaultValue={title} onChange={handleTitle} id ="av_title" className={`border border-[#121212] py-3 px-4 rounded-md placeholder-[#808080] text-sm lg:text-xl font-nunito font-medium w-full`} placeholder="Avatar Title" type="text" name = "title"/>
+					<input defaultValue={title} onChange={handleTitle} id="av_title" className={`border border-[#121212] py-3 px-4 rounded-md placeholder-[#808080] text-sm lg:text-xl font-nunito font-medium w-full`} placeholder="Avatar Title" type="text" name="title" />
 					<h1 className='text-[24px]'>Upload your Pictures</h1>
 					<p className="aso-dd2-p">You can upload files like PNG, JPG, WEBP are supported</p>
 					<form action="" className="aso-dd2-form">
@@ -197,7 +198,7 @@ const ImageUpload = ({ setStep, step, photoUser }) => {
 											<div
 												key={index}
 												className="vic_her_div relative cbk-hover"
-												// onChange={storeItem(image)}
+											// onChange={storeItem(image)}
 											>
 												<img src={image} className="vic_her w-[120px] h-[125px]" />
 

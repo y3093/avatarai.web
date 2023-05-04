@@ -76,7 +76,7 @@ export default function SignUp_first() {
 			const stateObj = { ...prev, [name]: '' };
 
 			switch (name) {
-				
+
 				case 'password':
 					if (!value) {
 						stateObj[name] = 'Please enter Password.';
@@ -134,7 +134,8 @@ export default function SignUp_first() {
 
 		console.log('items', item);
 		localStorage.setItem('opt_mail', JSON.stringify(item.email));
-		result = await fetch('https://zuvatar.hng.tech/api/v1/api/user', {
+		// /v1/api
+		result = await fetch('http://175.178.196.37:8000/api/user', {
 			method: 'POST',
 			body: JSON.stringify(items),
 			headers: {
@@ -155,8 +156,8 @@ export default function SignUp_first() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		
-		if ( !new RegExp( /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(email)) {
+
+		if (!new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(email)) {
 			setEmailError(true);
 			return
 		} else {
@@ -258,11 +259,11 @@ export default function SignUp_first() {
 								onChange={(e) => setEmail(e.target.value)}
 								type="email"
 								name="email"
-								
+
 								className={`border border-[#121212] py-3 px-4 rounded-md placeholder-[#808080] text-sm lg:text-xl font-nunito font-medium w-full`}
 							/>
-							{emailError? <p className='ml-1 text-red-400 text-[1rem] md:text-[1.2rem]'>please input a valid email</p>: ""}
-							
+							{emailError ? <p className='ml-1 text-red-400 text-[1rem] md:text-[1.2rem]'>please input a valid email</p> : ""}
+
 						</div>
 						<div className="flex flex-col">
 							<label htmlFor="email" className="text-black font-nunito font-medium text-sm lg:text-xl">
@@ -342,6 +343,6 @@ export default function SignUp_first() {
 				</div>
 			</div>
 		</div>
-		
+
 	);
 }
